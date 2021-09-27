@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IntelliJ
+.idea/
+
+# GoogleCloud SDK
+google-cloud-sdk*
+
+# Kubernetes
+kubectl.sha256

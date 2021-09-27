@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dask
+    type: test
+  name: dask-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dask
+      type: test
+  template:
+    metadata:
+      labels:
+        app: dask
+        type: test
+    spec:
+      containers:
+        -
+          image: dask-scheduler
+          name: scheduler
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+        -
+          env:
+            -
+              name: SCHEDULER_ADDRESS
+              value: "localhost"
+            -
+              name: SCHEDULER_PORT
+              value: "8080"
+          image: dask-worker
+          name: worker
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8282
+        -
+          image: dask-example
+          name: example
+          imagePullPolicy: Never
